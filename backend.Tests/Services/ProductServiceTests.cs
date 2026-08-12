@@ -113,8 +113,11 @@ public class ProductServiceTests
 
         _categoryRepositoryMock.ExistsAsync(999).Returns(false);
 
-        // Act & Assert
-        await Assert.ThrowsAsync<ArgumentException>(() => _sut.CreateProductAsync(createDto));
+        // Act
+        Func<Task> act = () => _sut.CreateProductAsync(createDto);
+
+        // Assert
+        await Assert.ThrowsAsync<ArgumentException>(act);
     }
 
     [Fact]
